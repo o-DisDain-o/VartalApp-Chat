@@ -16,6 +16,23 @@
     }
 }
 
+html::-webkit-scrollbar {
+    width: 3vh;
+}
+
+html::-webkit-scrollbar-thumb {
+    background-color: #8da4f1;
+}
+
+html::-webkit-scrollbar-track {
+    background-color: green;
+}
+
+// html:
+
+
+
+
 .formContainer {
     background-color: #a7bcff;
     height: 100vh;
@@ -113,14 +130,38 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    // scrollbar-width: thin;
+    
+    
 
     .container {
-        border: 1px solid white;
+        border: 1px solid transparent;
         border-radius: 10px;
         width: 65%;
         height: 80%;
         display: flex;
         overflow: hidden;
+        
+        ::-webkit-scrollbar {
+            width: 0.7vw;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: rgba(141, 164, 241, 0.5);
+            opacity: 0.5;
+
+            :hover {
+                background-color: rgba(141, 164, 241, 1);
+            }
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+        ::-webkit-scrollbar-horizontal {
+            width: 0;
+            display: none;
+        }
 
         @include tablet {
             width: 90%;
@@ -193,20 +234,11 @@
                     }
                 }
 
-                
-                // background-color: transparent;
-
-                // form {
-                //     background-color: #3e3c61;
-
-                //     input {
-                //         background-color: #3e3c61;
-                //         border: none;
-                //         height: 40px;
-                //         width: 100%;
-
-                //     }
-                // }
+                .seachErr {
+                    font-size: 15px;
+                    padding: 10px;
+                    color: white;
+                }
             }
 
             .userChat {

@@ -1,15 +1,30 @@
-import React from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
+import { ChatContext } from '../context/ChatContext'
+import { AuthContext } from '../context/AuthContext';
+import ReactTimeAgo from 'react-time-ago'
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en.json'
 
-function Message() {
+function Message({message}) {
+  TimeAgo.addDefaultLocale(en)
+  const {currentUser} = useContext(AuthContext)
+  const {data} = useContext(ChatContext);
+
+  const ref = useRef();
+  useEffect(() => {
+    ref.current?.scrollIntoView({behavior: "smooth"})
+  }, [message])
   return (
-    <div className='message owner'>
+    <div ref={ref}className={`message ${message.senderId === currentUser.uid && "owner"}`}>
       <div className="messageInfo">
-        <img src="https://alliancensut.com/wp-content/uploads/photo-gallery/Devang.jpeg?bwg=1661086493" alt="Profile Picture" />
-        <span>just now</span>
+        <img src={message.senderId === currentUser.uid ? currentUser.photoURL : data.user.photoURL} alt="Profile Picture" />
+        <span >
+          <ReactTimeAgo date={message.date.toDate()} locale="en-US" timeStyle="twitter"/>
+        </span>
       </div>
       <div className="messageContent">
-        <p>hello</p>
-        <img src="https://alliancensut.com/wp-content/uploads/photo-gallery/Devang.jpeg?bwg=1661086493" alt="Profile Picture" />
+        {message.text !== "" && <p>{message.text}</p>}
+        {message.img && <img src={message.img} alt="" />}
       </div>
     </div>
   )

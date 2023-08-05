@@ -5,7 +5,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore"; 
 import {auth, storage} from "../firebase"
 import {db} from "../firebase"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Register = () => {
   const [err, setErr] = useState(false);  
@@ -17,7 +17,7 @@ const Register = () => {
     const emailId = e.target[1].value;
     const password = e.target[2].value; 
     const file = e.target[3].files[0];
-    console.log(emailId)
+    // console.log(emailId)
     // const auth  = getAuth();
 
     try {
@@ -76,7 +76,7 @@ const Register = () => {
                 <button>Sign Up</button>
                 {err && <span>Something went wrong</span>}
             </form>
-            <p>Already have an account? Login</p>
+            <p>Already have an account? <Link to="/login">Login</Link></p>
         </div>
     </div>
   )
